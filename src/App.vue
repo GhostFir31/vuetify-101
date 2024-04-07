@@ -10,7 +10,7 @@
     <v-navigation-drawer>
       <v-list-item link to="/" title="INICIO"></v-list-item>
       <v-list-item link to="/imagen" title="JOKES Y IMAGENES"></v-list-item>
-      <v-list-item link to="/tabla" title="DATOS"></v-list-item>
+      <v-list-item link to="tabla" title="DATOS"></v-list-item>
     </v-navigation-drawer>
 
     <v-main
