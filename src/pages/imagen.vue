@@ -1,35 +1,42 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <v-card
-      class="mx-auto"
-      max-width="400"
+  <v-card class="mx-auto" max-width="400">
+    <img
+      height="400"
+      width="400"
+      :src="urlImagen"
+      alt="Imagen"
     >
-      <v-img
-        class="align-end text-white"
-        height="200"
-        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-        cover
-      >
-        <v-card-title>IMAGEN</v-card-title>
-      </v-img>
-  
-      <v-card-subtitle class="pt-4">
-        Number 10
-      </v-card-subtitle>
-  
-      <v-card-text>
-        <div>Whitehaven Beach</div>
-  
-        <div>Whitsunday Island, Whitsunday Islands</div>
-      </v-card-text>
-  
-      <v-card-actions>
-        <v-btn color="orange">
-          Share
-        </v-btn>
-  
-        <v-btn color="orange">
-          Explore
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </template>
+    <p>{{ chiste }}</p>
+    <v-card-actions>
+      <v-btn color="black" @click="cambiaImagenYChiste">
+        Cambiar
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const urlImagen = ref("https://picsum.photos/200/300");
+const chiste = ref("");
+
+async function cambiaImagenYChiste() {
+  await cambiaImagen();
+  await cambiaChiste();
+}
+
+async function cambiaImagen() {
+  let respuesta = await fetch("https://picsum.photos/200/300");
+  urlImagen.value = respuesta.url;
+}
+
+async function cambiaChiste() {
+  let respuestaChiste = await fetch("https://api.chucknorris.io/jokes/random");
+  let datosChiste = await respuestaChiste.json();
+  chiste.value = datosChiste.value;
+}
+
+cambiaChiste();
+</script>
